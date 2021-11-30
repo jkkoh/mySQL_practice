@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <style>
+        *{margin:0;padding:0;}
+        body{
+            width:100vw;
+            height:100vh;
+            
+        }
+        .m_success{
+            width:100vw;
+            height: 80px;
+            background-color: cadetblue;
+        }
+        .m_error{
+            width:100vw;
+            height: 80px;
+            background-color: red;
+        }
+        .main{
+            width: 100vw;
+            background-color: coral;
+        }
+        .sub{
+            width: 100vw;
+            background-color: crimson;
+        }
+        .table{
+            width:100vw;
+        }
+    </style>
+</head>
+<body>
+    <% if (messages.success) { %>
+        <div class="m_success"><%- messages.success %></div>
+    <% } %>
+    <% if (messages.error) { %>
+        <div class="m_error"><%- messages.error %></div>
+    <% } %>
+
+    <div class="main"> 
+        <div class="main_h">
+            <ul>
+                <li>
+                    <a>Books</a>
+                </li>
+                <li>
+                    <a href="/books/add">Add Book</a>
+                </li>
+            </ul>
+        </div>
+    <div class="sub">
+        
+        <% if(data.length) { %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for(var i = 0; i< data.length; i++) { %>
+                <tr>
+                    <th><%= (i+1) %></th>
+                    <td><%= data[i].name%></td>
+                    <td><%= data[i].author%></td>
+                    <td>
+                        <a class="btn edit" href="../books/edit/<%=data[i].id%>">Edit</a>                       
+                        <a class="btn delete" onclick="return alert('Are You sure?')" href="../books/delete/<%=data[i].id%>">Delete</a>                       
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <% } %>
+        
+        <!-- if result is empty -->
+        <% if(!data.length) { %>
+            <p>No book found!</p>
+        <% } %>
+
+        </div>
+    </div>
+</body>
+</html>
+
+
